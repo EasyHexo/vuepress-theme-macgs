@@ -7,7 +7,7 @@
   ![License][mit-img]
   [![Github stars][star-img]][gh-url]
 
-  <em>A vuepress theme for <a href="https://easyhexo.com" target="_blank">easyhexo.com</a></em>
+  <em>💫 A vuepress theme for <a href="https://easyhexo.com" target="_blank">easyhexo.com</a></em>
 </div>
 
 # Quick start
