@@ -1,0 +1,9 @@
+{
+  "name": "vuepress-theme-macgs",
+  "version": "0.1.0-rc.0",
+  "description": "A vuepress theme for easyhexo.com",
+  "main": "index.js",
+  "repository": "https://github.com/EasyHexo/vuepress-theme-macgs.git",
+  "author": "Mitscherlich <mitscherlich36@gmail.com>",
+  "license": "MIT"
+}
