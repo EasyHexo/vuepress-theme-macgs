@@ -1,5 +1,6 @@
 <div align="right">Language: :us:
-<a title="Chinese" href="../README.zh.md">:cn:</a>
+<a title="Chinese" href="./README.zh.md">:cn:</a>
+</div>
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/EasyHexo/vuepress-theme-macgs/master/art/logo.png" alt="logo" width="250px" height="250px">
