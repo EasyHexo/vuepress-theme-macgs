@@ -1,5 +1,5 @@
-<div align="right">Language: :us:
-<a title="Chinese" href="./README.zh.md">:cn:</a>
+<div align="right">Language: :cn:
+<a title="English" href="./README.md">:us:</a>
 </div>
 
 <div align="center">
@@ -16,58 +16,58 @@
   ![Love][love-img]
   ![Version][version-img]
 
-  <em>💫 A vuepress theme for <a href="https://easyhexo.com" target="_blank">easyhexo.com</a></em>
+  <em>A vuepress theme for <a href="https://easyhexo.com" target="_blank">easyhexo.com</a></em>
 </div>
 
-# Quick start
+# 快速开始
 
-> Note this is a theme of `vuepress@1.x` but not compatible with `vuepress@0.x`
+> 这个主题仅支持 `vuepress@1.x`，并不支持 `vuepress@0.x`
 
-## Install
+## 安装
 
-Via this repo:
+通过本项目：
 
 ```bash
 $ npm i -S github:EasyHexo/vuepress-theme-macgs
-# yarn will also be ok!
+# yarn 也可以！
 $ yarn add github:EasyHexo/vuepress-theme-macgs
 ```
 
-## Setup
+## 设置
 
 ~~Just follow [vuepress-theme-default](https://vuepress.vuejs.org/zh/theme/default-theme-config.html). Everything is compatible!~~
 
- We are working on the documentation. Coming soon~
+我们正在编写文档，敬请期待。
 
-# Features
+# 特性
 
-- Word count & pv
-- Comments(Now only support `Valine`)
-- Search
+- 字数统计以及访问量显示
+- 评论（现在仅支持 `Valine`）
+- 搜索
 - ......
 
-# Contributing
+# 贡献
 
-**🤝 PRs Welcome**
+**🤝 欢迎 PRs**
 
-1. Fork it.
-2. Develop on `debelop` branch: `git checkout develop`
-3. Commit your changes: `git commit -m ":heart: Update something"`
-4. Push to the branch: `git push origin develop`
-5. Submit a PR.
+1. Fork 本项目。
+2. 在 `debelop` 分支开发: `git checkout develop`
+3. Commit 你的改动: `git commit -m ":heart: Update something"`
+4. 推送: `git push origin develop`
+5. 提交一个 PR。
 
-> We use a emoji in the front of the commit message.
+> 我们在 commit 信息前加一个 emoji。
 >
-> This is a good example: `:tada: Init repo`
+> 这是一个很好的例子： `:tada: Init repo`
 >
-> About emoji guide, we use [gitmoji](https://gitmoji.carloscuesta.me/).
+> 我们使用的 emoji 规范是 [gitmoji](https://gitmoji.carloscuesta.me/)。
 >
 > :heart:
 
-# TODO
+# 待办
 
-- [ ] Add document
-- [ ] Support [Vssue](https://vssue.js.org) comment
+- [ ] 添加文档
+- [ ] 支持 [Vssue](https://vssue.js.org) 评论
 - [ ] ......
 
 # License
