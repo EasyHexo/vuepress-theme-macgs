@@ -78,7 +78,7 @@ $ yarn add github:EasyHexo/vuepress-theme-macgs
 
 **👨‍💻 Easy Hexo** © Easy Hexo. 
 
-Authored by Easy Hexo, [@Mitscherlich](https://mitscherlich/). :heart:
+Authored by Easy Hexo, [@Mitscherlich](https://github.com/mitscherlich/). :heart:
 
 [@Mitscherlich's Blog](https://mitscherlich.me/) · [@GitHub](https://github.com/EasyHexo)
 
