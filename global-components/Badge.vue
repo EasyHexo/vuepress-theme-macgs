@@ -16,7 +16,10 @@ export default {
     return h(
       'span',
       {
-        class: ['badge', props.type, props.vertical]
+        class: ['badge', props.type],
+        style: {
+          verticalAlign: props.vertical
+        }
       },
       props.text || slots().default
     )
@@ -35,14 +38,12 @@ export default {
   color white
   margin-right 5px
   background-color #42b983
-  &.middle
-    vertical-align middle
-  &.top
-    vertical-align top
   &.tip, &.green
     background-color #42b983
   &.error
     background-color #DA5961 //#f66
   &.warning, &.warn, &.yellow
     background-color darken(#ffe564, 35%)
+  & + &
+    margin-left 5px
 </style>
