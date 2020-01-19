@@ -1,11 +1,14 @@
 <template>
   <div class="dropdown-wrapper" :class="{ open }">
-    <a class="dropdown-title" @click="toggle">
-      <span class="title">
-        {{ item.text }}
-      </span>
+    <button
+      class="dropdown-title"
+      type="button"
+      :aria-label="dropdownAriaLabel"
+      @click="setOpen(!open)"
+    >
+      <span class="title">{{ item.text }}</span>
       <span class="arrow" :class="open ? 'down' : 'right'" />
-    </a>
+    </button>
 
     <DropdownTransition>
       <ul v-show="open" class="nav-dropdown">
@@ -24,11 +27,22 @@
               :key="childSubItem.link"
               class="dropdown-subitem"
             >
-              <NavLink :item="childSubItem" />
+              <NavLink
+                :item="childSubItem"
+                @focusout="
+                  isLastItemOfArray(childSubItem, subItem.items) &&
+                    isLastItemOfArray(subItem, item.items) &&
+                    setOpen(false)
+                "
+              />
             </li>
           </ul>
 
-          <NavLink v-else :item="subItem" />
+          <NavLink
+            v-else
+            :item="subItem"
+            @focusout="isLastItemOfArray(subItem, item.items) && setOpen(false)"
+          />
         </li>
       </ul>
     </DropdownTransition>
@@ -38,6 +52,7 @@
 <script>
 import NavLink from './NavLink.vue'
 import DropdownTransition from './DropdownTransition.vue'
+import last from 'lodash/last'
 
 export default {
   components: { NavLink, DropdownTransition },
@@ -54,9 +69,25 @@ export default {
     }
   },
 
+  computed: {
+    dropdownAriaLabel() {
+      return this.item.ariaLabel || this.item.text
+    }
+  },
+
+  watch: {
+    $route() {
+      this.open = false
+    }
+  },
+
   methods: {
-    toggle() {
-      this.open = !this.open
+    setOpen(value) {
+      this.open = value
+    },
+
+    isLastItemOfArray(item, array) {
+      return last(array) === item
     }
   }
 }
@@ -67,6 +98,15 @@ export default {
   cursor pointer
   .dropdown-title
     display block
+    font-size 0.9rem
+    font-family inherit
+    cursor inherit
+    padding inherit
+    line-height 1.4rem
+    background transparent
+    border none
+    font-weight 500
+    color $textColor
     &:hover
       border-color transparent
     .arrow
@@ -117,6 +157,11 @@ export default {
   .dropdown-wrapper
     &.open .dropdown-title
       margin-bottom 0.5rem
+    .dropdown-title
+      font-weight 600
+      font-size inherit
+      &:hover
+        color $accentColor
     .nav-dropdown
       transition height .1s ease-out
       overflow hidden

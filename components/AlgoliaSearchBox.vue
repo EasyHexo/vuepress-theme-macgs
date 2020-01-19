@@ -6,7 +6,15 @@
 
 <script>
 export default {
+  name: 'AlgoliaSearchBox',
+
   props: ['options'],
+
+  data() {
+    return {
+      placeholder: undefined
+    }
+  },
 
   watch: {
     $lang(newValue) {
@@ -20,6 +28,7 @@ export default {
 
   mounted() {
     this.initialize(this.options, this.$lang)
+    this.placeholder = this.$site.themeConfig.searchPlaceholder || ''
   },
 
   methods: {
@@ -39,7 +48,12 @@ export default {
                 facetFilters: [`lang:${lang}`].concat(algoliaOptions.facetFilters || [])
               },
               algoliaOptions
-            )
+            ),
+            handleSelected: (input, event, suggestion) => {
+              const { pathname, hash } = new URL(suggestion.url)
+              const routepath = pathname.replace(this.$site.base, '/')
+              this.$router.push(`${routepath}${hash}`)
+            }
           })
         )
       })

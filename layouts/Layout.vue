@@ -10,15 +10,23 @@
     <div class="sidebar-mask" @click="toggleSidebar(false)" />
 
     <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
-      <slot slot="top" name="sidebar-top" />
-      <slot slot="bottom" name="sidebar-bottom" />
+      <template #top>
+        <slot name="sidebar-top" />
+      </template>
+      <template #bottom>
+        <slot name="sidebar-bottom" />
+      </template>
     </Sidebar>
 
     <Home v-if="$page.frontmatter.home" />
 
     <Page v-else :sidebar-items="sidebarItems">
-      <slot slot="top" name="page-top" />
-      <slot slot="bottom" name="page-bottom" />
+      <template #top>
+        <slot name="page-top" />
+      </template>
+      <template #bottom>
+        <slot name="page-bottom" />
+      </template>
     </Page>
   </div>
 </template>
@@ -31,6 +39,8 @@ import Sidebar from '../components/Sidebar.vue'
 import { resolveSidebarItems } from '../util'
 
 export default {
+  name: 'Layout',
+
   components: { Home, Page, Sidebar, Navbar },
 
   data() {
@@ -110,6 +120,3 @@ export default {
   }
 }
 </script>
-
-<style src="prismjs/themes/prism-tomorrow.css"></style>
-<style src="../styles/theme.styl" lang="stylus"></style>

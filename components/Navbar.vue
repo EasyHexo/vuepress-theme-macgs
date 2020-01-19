@@ -2,7 +2,7 @@
   <header class="navbar">
     <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')" />
 
-    <router-link :to="$localePath" class="home-link">
+    <RouterLink :to="$localePath" class="home-link">
       <img
         class="logo"
         v-if="$site.themeConfig.logo"
@@ -17,7 +17,7 @@
       >
         {{ $siteTitle }}
       </span>
-    </router-link>
+    </RouterLink>
 
     <div class="links" :style="linksWrapMaxWidth ? { 'max-width': linksWrapMaxWidth + 'px' } : {}">
       <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algolia" />

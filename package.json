@@ -1,7 +1,7 @@
 {
   "name": "vuepress-theme-macgs",
-  "version": "1.0.0-alpha.37",
-  "description": "💫 A vuepress theme for easyhexo.com",
+  "version": "1.2.0",
+  "description": "A vuepress theme for easyhexo.com",
   "main": "index.js",
   "repository": "https://github.com/EasyHexo/vuepress-theme-macgs.git",
   "homepage": "https://github.com/EasyHexo/vuepress-theme-macgs#readme",
@@ -14,28 +14,32 @@
     "lint": "eslint --ext .js,.vue ./"
   },
   "dependencies": {
-    "@vuepress/plugin-active-header-links": "^1.0.0-alpha.37",
-    "@vuepress/plugin-back-to-top": "^1.0.0-alpha.37",
-    "@vuepress/plugin-nprogress": "^1.0.0-alpha.37",
-    "@vuepress/plugin-search": "^1.0.0-alpha.37",
+    "@vuepress/plugin-active-header-links": "^1.2.0",
+    "@vuepress/plugin-back-to-top": "^1.2.0",
+    "@vuepress/plugin-nprogress": "^1.2.0",
+    "@vuepress/plugin-search": "^1.2.0",
+    "docsearch.js": "^2.6.3",
     "dplayer": "^1.25.0",
-    "leancloud-storage": "^3.11.1",
-    "stylus": "^0.54.5",
+    "leancloud-storage": "^4.2.0",
+    "lodash": "^4.17.15",
+    "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
-    "valine": "^1.3.4"
+    "valine": "^1.3.10",
+    "vuepress-plugin-container": "^2.1.2",
+    "vuepress-plugin-smooth-scroll": "^0.0.9"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.13.0",
-    "eslint-config-prettier": "^4.0.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-node": "^8.0.1",
-    "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-promise": "^4.0.1",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^5.1.0",
-    "prettier": "^1.16.4",
-    "webpack": "^4.29.3"
+    "eslint-plugin-vue": "^6.1.2",
+    "prettier": "^1.19.1",
+    "webpack": "^4.41.5"
   }
 }
