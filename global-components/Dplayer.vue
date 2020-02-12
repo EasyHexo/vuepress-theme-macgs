@@ -31,6 +31,10 @@ export default {
       type: String,
       default: 'https://api.prprpr.me/dplayer/'
     },
+    danmakuAddition: {
+      type: String,
+      default: ''
+    },
     autoplay: {
       type: Boolean,
       default: false
@@ -101,7 +105,8 @@ export default {
           },
           danmaku: {
             id: this.danmakuId,
-            api: this.danmakuApi
+            api: this.danmakuApi,
+            addition: [this.danmakuAddition]
           },
           mutex: this.mutex
         })
