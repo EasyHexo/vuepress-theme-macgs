@@ -100,4 +100,7 @@ a.sidebar-link
     border-left none
     &.active
       font-weight 500
+      border-right: 5px solid #32dcd1
+      background: $accentColor
+      color: #fff
 </style>
