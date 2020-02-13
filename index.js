@@ -23,7 +23,46 @@ module.exports = (options, ctx) => ({
     '@vuepress/search',
     '@vuepress/nprogress',
     '@vuepress/pwa',
-    '@vuepress/back-to-top'
+    '@vuepress/back-to-top',
+    [
+      'container',
+      {
+        type: 'tip',
+        defaultTitle: {
+          '/': 'TIP',
+          '/zh/': '提示'
+        }
+      }
+    ],
+    [
+      'container',
+      {
+        type: 'warning',
+        defaultTitle: {
+          '/': 'WARNING',
+          '/zh/': '注意'
+        }
+      }
+    ],
+    [
+      'container',
+      {
+        type: 'danger',
+        defaultTitle: {
+          '/': 'WARNING',
+          '/zh/': '警告'
+        }
+      }
+    ],
+    [
+      'container',
+      {
+        type: 'details',
+        before: info =>
+          `<details class="custom-block details">${info ? `<summary>${info}</summary>` : ''}\n`,
+        after: () => '</details>\n'
+      }
+    ]
     // ['@vuepress/google-analytics', themeConfig.ga],
     // ['@vuepress/google-analytics', { 'ga': 'UA-130601883-3' }],
   ]
