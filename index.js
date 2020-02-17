@@ -62,6 +62,21 @@ module.exports = (options, ctx) => ({
           `<details class="custom-block details">${info ? `<summary>${info}</summary>` : ''}\n`,
         after: () => '</details>\n'
       }
+    ],
+    [
+      'container',
+      {
+        type: 'right',
+        defaultTitle: '',
+      },
+    ],
+    [
+      'container',
+      {
+        type: 'theorem',
+        before: info => `<div class="theorem"><p class="title">${info}</p>`,
+        after: '</div>',
+      },
     ]
     // ['@vuepress/google-analytics', themeConfig.ga],
     // ['@vuepress/google-analytics', { 'ga': 'UA-130601883-3' }],
