@@ -67,16 +67,16 @@ module.exports = (options, ctx) => ({
       'container',
       {
         type: 'right',
-        defaultTitle: '',
-      },
+        defaultTitle: ''
+      }
     ],
     [
       'container',
       {
         type: 'theorem',
         before: info => `<div class="theorem"><p class="title">${info}</p>`,
-        after: '</div>',
-      },
+        after: '</div>'
+      }
     ]
     // ['@vuepress/google-analytics', themeConfig.ga],
     // ['@vuepress/google-analytics', { 'ga': 'UA-130601883-3' }],
