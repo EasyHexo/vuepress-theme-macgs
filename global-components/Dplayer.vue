@@ -29,7 +29,7 @@ export default {
     },
     danmakuApi: {
       type: String,
-      default: 'https://api.prprpr.me/dplayer/'
+      default: 'https://danmu.u2sb.top/api/danmu/dplayer/'
     },
     danmakuAddition: {
       type: String,
