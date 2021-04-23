@@ -14,6 +14,7 @@
 
           <OutboundLink />
         </a>
+
         <RouterLink v-else class="prev" :to="prev.path">
           {{ prev.title || prev.path }}
         </RouterLink>
@@ -95,6 +96,8 @@ function resolvePageLink(linkType, { $themeConfig, $page, $route, $site, sidebar
   const link = isNil(pageLinkConfig) ? themeLinkConfig : pageLinkConfig
 
   if (link === false) {
+    // eslint-disable-next-line no-useless-return
+    return
   } else if (isString(link)) {
     return resolvePage($site.pages, link, $route.path)
   } else {

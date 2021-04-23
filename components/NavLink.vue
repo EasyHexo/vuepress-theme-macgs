@@ -13,11 +13,11 @@
     :href="link"
     class="nav-link external"
     :target="target"
-    :rel="ref"
+    :rel="rel"
     @focusout="focusoutAction"
   >
     {{ item.text }}
-    <OutboundLink />
+    <OutboundLink v-if="isBlankTarget" />
   </a>
 </template>
 
@@ -25,6 +25,8 @@
 import { isExternal, isMailto, isTel, ensureExt } from '../util'
 
 export default {
+  name: 'NavLink',
+
   props: {
     item: {
       required: true
@@ -69,10 +71,13 @@ export default {
       if (this.isNonHttpURI) {
         return null
       }
+      if (this.item.rel === false) {
+        return null
+      }
       if (this.item.rel) {
         return this.item.rel
       }
-      return this.isBlankTarget ? 'noopener noreferrer' : ''
+      return this.isBlankTarget ? 'noopener noreferrer' : null
     }
   },
 

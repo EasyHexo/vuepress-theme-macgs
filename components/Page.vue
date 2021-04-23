@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import PageEdit from './PageEdit.vue'
-import PageNav from './PageNav.vue'
+import PageEdit from '@theme/components/PageEdit.vue'
+import PageNav from '@theme/components/PageNav.vue'
 import Comment from './Comment.vue'
 
 export default {

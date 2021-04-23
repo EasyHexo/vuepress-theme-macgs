@@ -25,6 +25,12 @@
         </span>
         <span class="pv leancloud-visitors-count" />
       </small>
+
+      <!-- We don't need last update section -->
+      <!-- <div v-if="lastUpdated" class="last-updated">
+        <span class="prefix">{{ lastUpdatedText }}:</span>
+        <span class="time">{{ lastUpdated }}</span>
+      </div> -->
     </div>
   </footer>
 </template>
@@ -91,8 +97,8 @@ export default {
   methods: {
     createEditLink(repo, docsRepo, docsDir, docsBranch, path) {
       const bitbucket = /bitbucket.org/
-      if (bitbucket.test(repo)) {
-        const base = outboundRE.test(docsRepo) ? docsRepo : repo
+      if (bitbucket.test(docsRepo)) {
+        const base = docsRepo
         return (
           base.replace(endingSlashRE, '') +
           `/src` +
@@ -103,10 +109,22 @@ export default {
         )
       }
 
+      const gitlab = /gitlab.com/
+      if (gitlab.test(docsRepo)) {
+        const base = docsRepo
+        return (
+          base.replace(endingSlashRE, '') +
+          `/-/edit` +
+          `/${docsBranch}/` +
+          (docsDir ? docsDir.replace(endingSlashRE, '') + '/' : '') +
+          path
+        )
+      }
+
       const base = outboundRE.test(docsRepo) ? docsRepo : `https://github.com/${docsRepo}`
       return (
         base.replace(endingSlashRE, '') +
-        `/edit` +
+        '/edit' +
         `/${docsBranch}/` +
         (docsDir ? docsDir.replace(endingSlashRE, '') + '/' : '') +
         path
@@ -153,7 +171,7 @@ export default {
 
     .time
       font-weight 400
-      color #aaa
+      color #767676
 
   .leancloud-visitors
     display flex

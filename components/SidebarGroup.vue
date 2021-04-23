@@ -9,7 +9,7 @@
       `depth-${depth}`
     ]"
   >
-    <router-link
+    <RouterLink
       v-if="item.path"
       class="sidebar-heading clickable"
       :class="{
@@ -20,20 +20,21 @@
       @click.native="$emit('toggle')"
     >
       <span>{{ item.title }}</span>
-      <span class="arrow" v-if="collapsable" :class="open ? 'down' : 'right'" />
-    </router-link>
+      <span v-if="collapsable" class="arrow" :class="open ? 'down' : 'right'" />
+    </RouterLink>
 
     <p v-else class="sidebar-heading" :class="{ open }" @click="$emit('toggle')">
       <span>{{ item.title }}</span>
-      <span class="arrow" v-if="collapsable" :class="open ? 'down' : 'right'" />
+      <span v-if="collapsable" class="arrow" :class="open ? 'down' : 'right'" />
     </p>
 
     <DropdownTransition>
       <SidebarLinks
+        v-if="open || !collapsable"
         class="sidebar-group-items"
         :items="item.children"
-        v-if="open || !collapsable"
-        :sidebarDepth="item.sidebarDepth"
+        :sidebar-depth="item.sidebarDepth"
+        :initial-open-group-index="item.initialOpenGroupIndex"
         :depth="depth + 1"
       />
     </DropdownTransition>
@@ -42,15 +43,22 @@
 
 <script>
 import { isActive } from '../util'
-import DropdownTransition from './DropdownTransition.vue'
+import DropdownTransition from '@theme/components/DropdownTransition.vue'
+
 export default {
   name: 'SidebarGroup',
+
+  components: {
+    DropdownTransition
+  },
+
   props: ['item', 'open', 'collapsable', 'depth'],
-  components: { DropdownTransition },
+
   // ref: https://vuejs.org/v2/guide/components-edge-cases.html#Circular-References-Between-Components
   beforeCreate() {
-    this.$options.components.SidebarLinks = require('./SidebarLinks.vue').default
+    this.$options.components.SidebarLinks = require('@theme/components/SidebarLinks.vue').default
   },
+
   methods: { isActive }
 }
 </script>
@@ -81,6 +89,7 @@ export default {
   &.depth-2
     & > .sidebar-heading
       border-left none
+
 .sidebar-heading
   color $textColor
   transition color .15s ease
@@ -106,6 +115,7 @@ export default {
       border-left-color $accentColor
     &:hover
       color $accentColor
+
 .sidebar-group-items
   transition height .1s ease-out
   font-size 0.95em

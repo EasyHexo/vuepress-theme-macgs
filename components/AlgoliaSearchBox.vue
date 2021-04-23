@@ -1,6 +1,6 @@
 <template>
   <form id="search-form" class="algolia-search-wrapper search-box" role="search">
-    <input id="algolia-search-input" class="search-query" />
+    <input id="algolia-search-input" class="search-query" :placeholder="placeholder" />
   </form>
 </template>
 
@@ -43,16 +43,15 @@ export default {
           Object.assign({}, userOptions, {
             inputSelector: '#algolia-search-input',
             // #697 Make docsearch work well at i18n mode.
-            algoliaOptions: Object.assign(
-              {
-                facetFilters: [`lang:${lang}`].concat(algoliaOptions.facetFilters || [])
-              },
-              algoliaOptions
-            ),
+            algoliaOptions: {
+              ...algoliaOptions,
+              facetFilters: [`lang:${lang}`].concat(algoliaOptions.facetFilters || [])
+            },
             handleSelected: (input, event, suggestion) => {
               const { pathname, hash } = new URL(suggestion.url)
               const routepath = pathname.replace(this.$site.base, '/')
-              this.$router.push(`${routepath}${hash}`)
+              const _hash = decodeURIComponent(hash)
+              this.$router.push(`${routepath}${_hash}`)
             }
           })
         )

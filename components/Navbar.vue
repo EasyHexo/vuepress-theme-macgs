@@ -4,15 +4,15 @@
 
     <RouterLink :to="$localePath" class="home-link">
       <img
-        class="logo"
         v-if="$site.themeConfig.logo"
+        class="logo"
         :src="$withBase($site.themeConfig.logo)"
         :alt="$siteTitle"
       />
       <span
+        v-if="$siteTitle"
         ref="siteName"
         class="site-name"
-        v-if="$siteTitle"
         :class="{ 'can-hide': $site.themeConfig.logo }"
       >
         {{ $siteTitle }}
@@ -21,24 +21,46 @@
 
     <div class="links" :style="linksWrapMaxWidth ? { 'max-width': linksWrapMaxWidth + 'px' } : {}">
       <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algolia" />
-      <SearchBox v-else-if="$site.themeConfig.search !== false" />
+      <SearchBox
+        v-else-if="$site.themeConfig.search !== false && $page.frontmatter.search !== false"
+      />
       <NavLinks class="can-hide" />
     </div>
   </header>
 </template>
 
 <script>
-import SidebarButton from './SidebarButton.vue'
 import AlgoliaSearchBox from '@AlgoliaSearchBox'
 import SearchBox from '@SearchBox'
-import NavLinks from './NavLinks.vue'
+import SidebarButton from '@theme/components/SidebarButton.vue'
+import NavLinks from '@theme/components/NavLinks.vue'
+
 export default {
-  components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox },
+  name: 'Navbar',
+
+  components: {
+    SidebarButton,
+    NavLinks,
+    SearchBox,
+    AlgoliaSearchBox
+  },
+
   data() {
     return {
       linksWrapMaxWidth: null
     }
   },
+
+  computed: {
+    algolia() {
+      return this.$themeLocaleConfig.algolia || this.$site.themeConfig.algolia || {}
+    },
+
+    isAlgoliaSearch() {
+      return this.algolia && this.algolia.apiKey && this.algolia.indexName
+    }
+  },
+
   mounted() {
     const MOBILE_DESKTOP_BREAKPOINT = 719 // refer to config.styl
     const NAVBAR_VERTICAL_PADDING =
@@ -55,14 +77,6 @@ export default {
     }
     handleLinksWrapWidth()
     window.addEventListener('resize', handleLinksWrapWidth, false)
-  },
-  computed: {
-    algolia() {
-      return this.$themeLocaleConfig.algolia || this.$site.themeConfig.algolia || {}
-    },
-    isAlgoliaSearch() {
-      return this.algolia && this.algolia.apiKey && this.algolia.indexName
-    }
   }
 }
 
@@ -77,6 +91,7 @@ function css(el, property) {
 <style lang="stylus">
 $navbar-vertical-padding = 0.7rem
 $navbar-horizontal-padding = 1.5rem
+
 .navbar
   padding $navbar-vertical-padding $navbar-horizontal-padding
   line-height $navbarHeight - 1.4rem
@@ -105,6 +120,7 @@ $navbar-horizontal-padding = 1.5rem
     .search-box
       flex: 0 0 auto
       vertical-align top
+
 @media (max-width: $MQMobile)
   .navbar
     padding-left 4rem
@@ -112,4 +128,9 @@ $navbar-horizontal-padding = 1.5rem
       display none
     .links
       padding-left 1.5rem
+    .site-name
+      width calc(100vw - 9.4rem)
+      overflow hidden
+      white-space nowrap
+      text-overflow ellipsis
 </style>

@@ -1,13 +1,13 @@
 <template>
-  <main class="home" aria-labelledby="main-title">
+  <main class="home" :aria-labelledby="data.heroText !== null ? 'main-title' : null">
     <header class="hero">
-      <img v-if="data.heroImage" :src="$withBase(data.heroImage)" alt="hero" />
+      <img v-if="data.heroImage" :src="$withBase(data.heroImage)" :alt="data.heroAlt || 'hero'" />
 
-      <h1 id="main-title">
+      <h1 v-if="data.heroText !== null" id="main-title">
         {{ data.heroText || $title || 'Hello' }}
       </h1>
 
-      <p class="description">
+      <p v-if="data.tagline !== null" class="description">
         {{ data.tagline || $description || 'Welcome to your VuePress site' }}
       </p>
 
@@ -17,13 +17,13 @@
     </header>
 
     <div v-if="data.features && data.features.length" class="features">
-      <div v-for="(feature, index) in data.features" class="feature" :key="index">
+      <div v-for="(feature, index) in data.features" :key="index" class="feature">
         <h2>{{ feature.title }}</h2>
         <p>{{ feature.details }}</p>
       </div>
     </div>
 
-    <Content class="custom" />
+    <Content class="theme-macgs-content custom" />
 
     <div v-if="data.footer" class="footer">
       {{ data.footer }}
@@ -32,9 +32,11 @@
 </template>
 
 <script>
-import NavLink from './NavLink.vue'
+import NavLink from '@theme/components/NavLink.vue'
 
 export default {
+  name: 'Home',
+
   components: { NavLink },
 
   computed: {
@@ -55,7 +57,7 @@ export default {
 <style lang="stylus">
 .home
   padding $navbarHeight 2rem 0
-  max-width 960px
+  max-width $homePageWidth
   margin 0px auto
   display block
   .hero

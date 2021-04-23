@@ -1,5 +1,5 @@
 <template>
-  <ul class="sidebar-links" v-if="items.length">
+  <ul v-if="items.length" class="sidebar-links">
     <li v-for="(item, i) in items" :key="i">
       <SidebarGroup
         v-if="item.type === 'group'"
@@ -15,30 +15,38 @@
 </template>
 
 <script>
-import SidebarGroup from './SidebarGroup.vue'
-import SidebarLink from './SidebarLink.vue'
+import SidebarGroup from '@theme/components/SidebarGroup.vue'
+import SidebarLink from '@theme/components/SidebarLink.vue'
 import { isActive } from '../util'
+
 export default {
   name: 'SidebarLinks',
+
   components: { SidebarGroup, SidebarLink },
+
   props: [
     'items',
     'depth', // depth of current sidebar links
-    'sidebarDepth' // depth of headers to be extracted
+    'sidebarDepth', // depth of headers to be extracted
+    'initialOpenGroupIndex'
   ],
+
   data() {
     return {
-      openGroupIndex: 0
+      openGroupIndex: this.initialOpenGroupIndex || 0
     }
   },
-  created() {
-    this.refreshIndex()
-  },
+
   watch: {
     $route() {
       this.refreshIndex()
     }
   },
+
+  created() {
+    this.refreshIndex()
+  },
+
   methods: {
     refreshIndex() {
       const index = resolveOpenGroupIndex(this.$route, this.items)
@@ -46,9 +54,11 @@ export default {
         this.openGroupIndex = index
       }
     },
+
     toggleGroup(index) {
       this.openGroupIndex = index === this.openGroupIndex ? -1 : index
     },
+
     isActive(page) {
       return isActive(this.$route, page.regularPath)
     }
@@ -67,13 +77,16 @@ function resolveOpenGroupIndex(route, items) {
 
 function descendantIsActive(route, item) {
   if (item.type === 'group') {
-    return item.children.some(child => {
+    const childIsActive = item.path && isActive(route, item.path)
+    const grandChildIsActive = item.children.some(child => {
       if (child.type === 'group') {
         return descendantIsActive(route, child)
       } else {
         return child.type === 'page' && isActive(route, child.path)
       }
     })
+
+    return childIsActive || grandChildIsActive
   }
   return false
 }

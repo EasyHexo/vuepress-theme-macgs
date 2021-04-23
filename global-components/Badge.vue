@@ -36,14 +36,13 @@ export default {
   border-radius 3px
   padding 0 6px
   color white
-  margin-right 5px
   background-color #42b983
   &.tip, &.green
-    background-color #42b983
+    background-color $badgeTipColor
   &.error
-    background-color #DA5961 //#f66
+    background-color $badgeErrorColor
   &.warning, &.warn, &.yellow
-    background-color darken(#ffe564, 35%)
+    background-color $badgeWarningColor
   & + &
     margin-left 5px
 </style>

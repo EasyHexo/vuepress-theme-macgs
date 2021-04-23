@@ -13,106 +13,105 @@ export default {
     src: {
       type: String,
       default: '',
-      required: true
+      required: true,
     },
     screenshot: {
       type: Boolean,
-      default: false
+      default: false,
     },
     subtitle: {
       type: String,
-      default: ''
+      default: '',
     },
     danmakuId: {
       type: String,
-      default: ''
+      default: '',
     },
     danmakuApi: {
       type: String,
-      default: 'https://danmu.u2sb.top/api/danmu/dplayer/'
+      default: 'https://danmu.u2sb.top/api/danmu/dplayer/',
     },
     danmakuAddition: {
       type: String,
-      default: ''
+      default: '',
     },
     autoplay: {
       type: Boolean,
-      default: false
+      default: false,
     },
     theme: {
       type: String,
-      default: '#b7daff'
+      default: '#b7daff',
     },
     loop: {
       type: Boolean,
-      default: false
+      default: false,
     },
     hotkey: {
       type: Boolean,
-      default: true
+      default: true,
     },
     preload: {
       type: String,
-      default: 'auto'
+      default: 'auto',
     },
     logo: {
       type: String,
-      default: ''
+      default: '',
     },
     mutex: {
       type: Boolean,
-      default: true
+      default: true,
     },
     crossOrigin: {
       type: Boolean,
-      default: false
+      default: false,
     },
     proxy: {
       type: String,
-      default: 'https://cors-anywhere.herokuapp.com'
-    }
+      default: 'https://cors-anywhere.herokuapp.com',
+    },
   },
   data() {
     return {
-      shouldShowPlayer: false
+      shouldShowPlayer: false,
     }
   },
   methods: {
     showPlayer() {
       this.shouldShowPlayer = true
-      Promise.all([
-        import(/* webpackChunkName: "dplayer" */ 'dplayer/dist/DPlayer.min.js'),
-        import(/* webpackChunkName: "dplayer" */ 'dplayer/dist/DPlayer.min.css')
-      ]).then(([{ default: DPlayer }]) => {
-        // eslint-disable-next-line
-        new DPlayer({
-          container: this.$refs.container,
-          autoplay: this.autoplay,
-          theme: this.theme,
-          loop: this.loop,
-          screenshot: this.screenshot,
-          hotkey: this.hotkey,
-          preload: this.preload,
-          logo: this.logo,
-          video: {
-            url: this.crossOrigin ? `${this.proxy}/${this.src}` : this.src
-          },
-          subtitle: {
-            url: this.crossOrigin ? `${this.proxy}/${this.subtitle}` : this.subtitle,
-            color: '#000000',
-            fontSize: '25px',
-            bottom: '2%'
-          },
-          danmaku: {
-            id: this.danmakuId,
-            api: this.danmakuApi,
-            addition: [this.danmakuAddition]
-          },
-          mutex: this.mutex
-        })
-      })
-    }
-  }
+      Promise.all([import(/* webpackChunkName: "dplayer" */ 'dplayer/dist/DPlayer.min.js')]).then(
+        ([{ default: DPlayer }]) => {
+          // eslint-disable-next-line
+          new DPlayer({
+            container: this.$refs.container,
+            autoplay: this.autoplay,
+            theme: this.theme,
+            loop: this.loop,
+            screenshot: this.screenshot,
+            hotkey: this.hotkey,
+            preload: this.preload,
+            logo: this.logo,
+            video: {
+              url: this.crossOrigin ? `${this.proxy}/${this.src}` : this.src,
+            },
+            subtitle: {
+              url: this.crossOrigin ? `${this.proxy}/${this.subtitle}` : this.subtitle,
+              color: '#000000',
+              fontSize: '25px',
+              bottom: '2%',
+            },
+            danmaku: {
+              id: this.danmakuId,
+              api: this.danmakuApi,
+              addition: [this.danmakuAddition],
+            },
+            mutex: this.mutex,
+          })
+        }
+      )
+    },
+  },
 }
 </script>
 
